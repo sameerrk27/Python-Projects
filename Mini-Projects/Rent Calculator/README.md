@@ -32,8 +32,3 @@ The program should display:
 
 - The total amount to be paid
 - The amount each person should pay
-
-## Project Details
-
-- Folder: `Rent Calculator`
-- File: `rentcalc.py`
