@@ -1,27 +1,46 @@
 # QR Code - Accepts Payments
 
-This Python script creates UPI payment QR codes for Google Pay, PhonePe, and Paytm from a UPI ID entered by the user.
+This Python script creates UPI payment QR codes from a UPI ID entered by the user.
 
 ## How It Works
 
-1. Prompts for a UPI ID and stores the input in `upi_id`.
-2. Builds a UPI payment URI for each app, for example:
-   `upi://pay?pa=<UPI_ID>&pn=<RECIPIENT_NAME>&mc=<MERCHANT_CODE>`
-3. Uses the `qrcode` library to turn each URI into a QR-code image.
-4. Saves the images as `google_pay_qr.png`, `phonepe_qr.png`, and `paytm_qr.png`.
-5. Calls `.show()` to open each generated image in the system's default image viewer.
+1. The program asks for a UPI ID.
+2. It builds a UPI payment link with payment details.
+3. `qrcode.make()` turns the link into a QR-code image.
+4. The images are saved as `google_pay_qr.png`, `phonepe_qr.png`, and `paytm_qr.png` and then opened for viewing.
 
-The `pa` parameter is the payee's UPI ID, `pn` is the payee name, and `mc` is the merchant code. The supplied script uses the same URI format for all three apps; these are not app-specific payment links.
+The sample creates the same kind of UPI link for each filename; the QR codes are not app-specific.
+
+## UPI Payment Link Details
+
+A UPI link can look like this:
+
+```text
+upi://pay?pa=<UPI_ID>&pn=<NAME>&am=<AMOUNT>&tn=<NOTE>&cu=INR
+```
+
+- `pa` — Payee address: recipient's UPI ID.
+- `pn` — Payee name: recipient's name.
+- `am` — Amount to pay.
+- `tn` — Transaction note, such as “Rent”.
+- `cu` — Currency code, usually `INR`.
+- `mc` — Merchant code. Use the real code for a merchant; omit it for a personal UPI account rather than using an invented value.
+- `tid` — Transaction ID, when provided.
+- `tr` — Transaction reference ID, when provided.
+- `url` — Related URL, when needed.
+
+Some details are optional and depend on the payment use case. Use accurate recipient and transaction information.
 
 ## Requirements
 
-Install both required libraries, `qrcode` and `Pillow`, from the terminal:
+Install both required libraries from the terminal:
 
 ```bash
 pip install qrcode pillow
 ```
 
-`qrcode` generates the QR-code images, and `Pillow` provides image handling and display support.
+- `qrcode` generates QR-code images.
+- `Pillow` handles the images and supports displaying them.
 
 ## Run the Script
 
@@ -31,10 +50,6 @@ python qrcode.py
 
 Enter a valid UPI ID when prompted. The generated images are saved in the current working directory.
 
-## Why a QR Scan May Not Show a Bank Name or Allow Payment
+## Important Note
 
-A UPI QR code encodes payment details such as the recipient's UPI ID; it does not itself specify the recipient's bank. The UPI app resolves the VPA and displays the account/payee details it can verify. A bank name may not be shown until the payment app resolves the UPI ID, and the app or bank may determine what recipient information is displayed.
-
-The sample code uses placeholder values (`Recipient Name` and `mc=1234`) and only includes a few URI parameters. Replace placeholders with accurate recipient details. Do not invent a merchant code: use a valid merchant code only when applicable, or omit the optional parameter. Also ensure the UPI ID is correct and active, and that the payment app supports the URI. QR creation does not guarantee that a payment can be completed; test with the intended UPI app and verify the payee shown in the app before approving any payment.
-
-For production use, construct the URI with proper URL encoding for user-provided values, validate inputs, and follow the payment provider's current UPI integration requirements. Never treat a scanned QR code as proof that a payment has succeeded.
+The QR code stores payment details; it does not process a payment or contain the recipient's bank name. The payment app resolves the UPI ID and determines which recipient details to show. Check the recipient details in the payment app before approving a payment.
