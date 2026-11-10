@@ -15,13 +15,15 @@ The `pa` parameter is the payee's UPI ID, `pn` is the payee name, and `mc` is th
 
 ## Requirements
 
-Install the QR-code library before running the script:
+Install both required libraries, `qrcode` and `Pillow`, from the terminal:
 
 ```bash
-python -m pip install qrcode[pil]
+pip install qrcode pillow
 ```
 
-Run the script from this folder:
+`qrcode` generates the QR-code images, and `Pillow` provides image handling and display support.
+
+## Run the Script
 
 ```bash
 python qrcode.py
