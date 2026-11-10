@@ -2,50 +2,78 @@
 
 ## Problem Statement
 
-A school or college often needs to manage student records, marks, and grade calculations efficiently. Manually handling this data can be time-consuming and error-prone.
+Schools and colleges often need a simple way to manage student records and grades. Manually tracking grades can become confusing and time-consuming, especially when records need to be updated or deleted frequently.
 
-This project helps to store student information, input their marks, calculate grades, and display the final result in a simple and organized way.
+This project helps manage student grades efficiently using a Python program. It allows the user to add, update, delete, and view student records.
 
 ## Features
 
-- Add student details
-- Enter marks for multiple subjects
-- Calculate total marks and percentage
-- Determine the grade
-- Display the final result for each student
-- Manage student records in an easy way
+- Add a new student with a grade
+- Update an existing student’s grade
+- Delete a student from the system
+- View all students and their grades
+- Run the system repeatedly using a menu-based interface
 
 ## Workflow
 
-1. The user enters the student’s name and roll number.
-2. The user enters marks for each subject.
-3. The program calculates:
-   - total marks
-   - percentage
-   - grade
+1. The program displays a menu with options.
+2. The user chooses an action:
+   - Add Student
+   - Update Student
+   - Delete Student
+   - View All Students
+   - Exit
+3. The program performs the selected action.
 4. The result is displayed on the screen.
 
-## Grade Calculation
+## Data Structure Used
 
-The grade may be calculated using the percentage range, for example:
+The program uses a Python dictionary:
 
-- 90 and above: A
-- 75 to 89: B
-- 60 to 74: C
-- 50 to 59: D
-- Below 50: F
+```python
+student_grades = {}
+```
+
+This dictionary stores each student name as a key and the grade as the value.
+
+## Functions in the Program
+
+- `add_student(name, grade)`
+  - Adds a student and their grade
+- `update_student(name, grade)`
+  - Updates the grade of an existing student
+- `del_student(name)`
+  - Deletes a student from the list
+- `display_all_students()`
+  - Shows all students and their grades
+- `main()`
+  - Runs the menu-based program continuously
+
+## Example Menu
+
+```text
+Student Grades Management System
+1. Add Student
+2. Update Student
+3. Delete Student
+4. View All Students
+5. Exit
+```
 
 ## Output
 
-The program displays:
+The program displays messages like:
 
-- Student name
-- Roll number
-- Subject marks
-- Total marks
-- Percentage
-- Final grade
+- Added student with grade
+- Student grade updated
+- Student not found
+- Student deleted successfully
+- All stored student records
 
 ## Project File
 
 - `students.py`
+
+## Notes
+
+This project focuses on basic student grade management, not advanced grade calculation. It is a simple and beginner-friendly program that demonstrates dictionary operations and menu-driven programming in Python.
